@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+	<package name="accountholder" namespace="/accountholder" extends="struts-default">
+	    <result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+		</result-types>
+	    <interceptors>
+	        <interceptor name="authentication" class="com.air.bankapp.controller.interceptors.AccountHolderInterceptor"/>
+	        <interceptor-stack name="authStack">
+	            <interceptor-ref name="authentication"/>
+	            <interceptor-ref name="defaultStack"/>
+	        </interceptor-stack>
+	    </interceptors>
+	    
+	    <default-interceptor-ref name="authStack"/>
+	    
+	    <action name="ActionHolderAccountSummary">
+	        <result type="tiles">accountHolderWelcomeWithViewAccountSummary</result>
+	    </action>
+	    <action name="AccountTransferSingle" class="com.air.bankapp.controller.actions.accountholder.AccountTransferAction">
+	        <result name="success" type="tiles">AccountTransferSingle</result>
+	    </action>
+	</package>
+</struts>

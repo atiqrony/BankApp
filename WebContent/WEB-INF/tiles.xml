@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/BaseLayout.jsp">
+	    <put-attribute name="title" value=""/>
+	    <put-attribute name="locale" value="/WEB-INF/views/Locale.jsp"/>
+	    <put-attribute name="header" value="/WEB-INF/views/accountHolderViews/Header.jsp"/>
+	    <put-attribute name="menu" value="/WEB-INF/views/accountHolderViews/Header.jsp"/>
+	    <put-attribute name="body" value="/WEB-INF/views/accountHolderViews/Header.jsp"/>
+	    <put-attribute name="footer" value="/WEB-INF/views/accountHolderViews/Header.jsp"/>
+	</definition>
+	
+	<definition name="accountHolderWelcomeWithViewAccountSummary" extends="baseLayout">
+	    <put-attribute name="title" value="Account Summary"/>
+	    <put-attribute name="header" value="/WEB-INF/views/accountHolderViews/Header.jsp"/>
+	    <put-attribute name="menu" value="/WEB-INF/views/accountHolderViews/Menu.jsp"/>
+	    <put-attribute name="body" value="/WEB-INF/views/accountHolderViews/AccountSummary.jsp"/>
+	    <put-attribute name="footer" value="/WEB-INF/views/accountHolderViews/Footer.jsp"/>
+	</definition>
+	
+	<definition name="adminWelcome" extends="baseLayout">
+	    <put-attribute name="title" value="Admin"/>
+	    <put-attribute name="header" value="/WEB-INF/views/adminViews/Header.jsp"/>
+	    <put-attribute name="menu" value="/WEB-INF/views/adminViews/Menu.jsp"/>
+	    <put-attribute name="body" value="/WEB-INF/views/adminViews/Menu.jsp"/>
+	    <put-attribute name="footer" value="/WEB-INF/views/adminViews/Footer.jsp"/>
+	</definition>	
+	
+	<definition name="AccountTransferSingle" extends="accountHolderWelcomeWithViewAccountSummary">
+	    <put-attribute name="title" value="Single Account Balance Transfer"/>
+	    <put-attribute name="body" value="/WEB-INF/views/accountHolderViews/AccountTransferSingle.jsp"/>
+	</definition>
+	
+</tiles-definitions>

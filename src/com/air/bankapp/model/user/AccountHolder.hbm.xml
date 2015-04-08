@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.air.bankapp.model.user" default-lazy="false">
+	<class name="AccountHolder" table="BANK_ACCOUNT">
+	    <id name="accountNumber" type="java.lang.Long" column="account_number">
+	        <generator class="sequence">s_account_number</generator>
+	    </id>
+	    <property name="accountType" type="string"/>
+	    <property name="accountHolderName" type="string"/>
+	    <property name="fatherName" type="string"/>
+	    <property name="motherName" type="string"/>
+	    <property name="permanentAddress" type="string"/>
+	    <property name ="presentAddress" type="string"/>
+	    <property name="contactNumber" type="string"/>
+	    <property name = "email" column="email_address" type="string"/>
+	    <property name="occupation" type="string"/>
+	    <property name="nid" column="nid_pn" type="string"/>
+	    <property name="currency" type="string"/>
+	    <property name="yearlyIncome" type="java.lang.Double"/>
+	    <property name="balance" type="java.math.BigDecimal"/>
+	    <property name="activeStatus" type="java.lang.Boolean"/>
+	    
+	</class>
+	
+	<class name="Authentication" table="USER_ACCOUNT">
+	    
+	</class>
+
+</hibernate-mapping>

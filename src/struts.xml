@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+	<constant name="struts.custom.i18n.resources" value="com.air.bankapp.resources.global" />	
+ 	<constant name="struts.devMode" value="true" />
+ 	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+ 	<constant name="struts.mapper.action.prefix.enabled" value="true" />
+ 	
+	<package name="user" namespace="/" extends="struts-default">
+	  
+		<result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+		</result-types>		
+		
+		<interceptors>
+			<interceptor name="authentication" class="com.air.bankapp.controller.interceptors.LoginInterceptor"/>
+			<interceptor-stack name="authStack">
+				<interceptor-ref name="authentication"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="authStack"/>
+		
+		<global-results>
+			<result name="login" type="redirect">login.action</result>
+			<result name="register" type="redirectAction">createAccount.action</result>
+		</global-results>
+		
+		<action name="login">
+			<interceptor-ref name="defaultStack"/>
+			<result >/WEB-INF/views/Login.jsp</result>
+		</action>
+		
+		<action name="validateUser" class="com.air.bankapp.controller.actions.LoginAction">	
+		    <interceptor-ref name="authStack"/>	    
+		    <result name="accountholder" type="tiles">accountHolderWelcomeWithViewAccountSummary</result>
+		    <result name="admin" type="tiles">adminWelcome</result>			         
+		    <result name="input">/WEB-INF/views/Login.jsp</result>		    
+		</action>
+		
+		<action name="createAccount" class="com.air.bankapp.controller.actions.registration.CreateAccountAction">
+		    <interceptor-ref name="defaultStack"/>
+		    <result name="success">/WEB-INF/views/userReg/CreateAccount.jsp</result>
+		</action>
+		<action name="createAccountContinue" class="com.air.bankapp.controller.actions.registration.CreateAccountContinueAction">
+		    <interceptor-ref name="defaultStack"/>
+		    <result name="success">/WEB-INF/views/userReg/CreateAccountContinue.jsp</result>
+		</action>
+		<action name="createAccountSuccess" class="com.air.bankapp.controller.actions.registration.CreateAccountSuccessAction">
+		    <interceptor-ref name="defaultStack"/>
+		    <result name="success">/WEB-INF/views/userReg/CreateAccountSuccess.jsp</result>
+		</action>
+		<!-- 
+		<action name="home">
+			<interceptor-ref name="authStack"/>
+			<result type="tiles">welcome</result>
+		</action>
+		
+		<action name="*Link" method="{1}" class="com.bjitacademy.training.LinkAction">
+			<interceptor-ref name="authStack"/>
+			<result name="struts" type="tiles">struts</result>
+			<result name="hibernate" type="tiles">hibernate</result>
+		</action>	
+		-->
+		<action name="locale" class="com.air.bankapp.controller.actions.LocaleSelectAction">
+			<interceptor-ref name="defaultStack"/>		
+			<result name="success">/WEB-INF/views/Login.jsp</result>	
+		</action>	
+		 
+		 
+	</package>
+	
+	<include file="struts-accountholder.xml"/>
+	<include file="struts-admin"/>
+</struts>
